@@ -1,15 +1,16 @@
 'use client';
 
-import { authenticate } from '@/app/lib/actions';
-import { lusitana } from '@/app/ui/fonts';
+import { useFormState, useFormStatus } from 'react-dom';
+import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
 } from '@heroicons/react/24/outline';
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
+
+import { authenticate } from '@/app/lib/actions';
+import { lusitana } from '@/app/ui/fonts';
 import { Button } from './button';
-import { useFormState, useFormStatus } from 'react-dom';
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);

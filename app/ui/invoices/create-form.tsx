@@ -1,6 +1,6 @@
 'use client';
 
-import { CustomerField } from '@/app/lib/definitions';
+import { useFormState } from 'react-dom';
 import Link from 'next/link';
 import {
   CheckIcon,
@@ -8,9 +8,10 @@ import {
   CurrencyDollarIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { Button } from '@/app/ui/button';
+
+import { CustomerField } from '@/app/lib/definitions';
 import { createInvoice } from '@/app/lib/actions';
-import { useFormState } from 'react-dom';
+import { Button } from '@/app/ui/button';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState = { message: null, errors: {} };
@@ -24,6 +25,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
             Choose customer
           </label>
+
           <div className="relative">
             <select
               id="customer"
@@ -35,12 +37,14 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
               <option value="" disabled>
                 Select a customer
               </option>
+
               {customers.map((customer) => (
                 <option key={customer.id} value={customer.id}>
                   {customer.name}
                 </option>
               ))}
             </select>
+
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
 
@@ -59,6 +63,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
           <label htmlFor="amount" className="mb-2 block text-sm font-medium">
             Choose an amount
           </label>
+
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <input

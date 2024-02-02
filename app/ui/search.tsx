@@ -1,8 +1,8 @@
 'use client';
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
@@ -16,11 +16,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
     params.set('page', '1');
 
-    if (term) {
-      params.set('query', term);
-    } else {
-      params.delete('query');
-    }
+    if (term) params.set('query', term);
+    else params.delete('query');
+
     replace(`${pathname}?${params.toString()}`);
   }, 300);
 

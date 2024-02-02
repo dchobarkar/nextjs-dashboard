@@ -1,11 +1,11 @@
 'use server';
 
 import { z } from 'zod';
-import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { sql } from '@vercel/postgres';
+import { signIn } from '@/auth';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -43,12 +43,11 @@ export async function createInvoice(prevState: State, formData: FormData) {
   });
 
   // If form validation fails, return errors early. Otherwise, continue.
-  if (!validatedFields.success) {
+  if (!validatedFields.success)
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missing Fields. Failed to Create Invoice.',
     };
-  }
 
   // Prepare data for insertion into the database
   const { customerId, amount, status } = validatedFields.data;
@@ -84,12 +83,11 @@ export async function updateInvoice(
     status: formData.get('status'),
   });
 
-  if (!validatedFields.success) {
+  if (!validatedFields.success)
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missing Fields. Failed to Update Invoice.',
     };
-  }
 
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
